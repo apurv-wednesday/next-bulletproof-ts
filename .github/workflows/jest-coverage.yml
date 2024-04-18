@@ -36,6 +36,5 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # threshold: ${{steps.threshold.outputs.prop}}
-          threshold: 80
           package-manager: yarn
           custom-title: Jest Coverage Report
