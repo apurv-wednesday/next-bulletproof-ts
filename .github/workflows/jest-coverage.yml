@@ -24,7 +24,7 @@ jobs:
         id: threshold
         uses: notiz-dev/github-action-json-property@release
         with:
-          path: 'jest.config.json'
+          path: 'jest.config.js'
           prop_path: 'coverageThreshold.global.statements'
 
       - name: Install dependencies
