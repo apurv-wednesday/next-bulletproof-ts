@@ -19,13 +19,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-
-      - name: Get Threshold
-        id: threshold
-        uses: notiz-dev/github-action-json-property@release
-        with:
-          path: 'jest.config.js'
-          prop_path: 'coverageThreshold.global.statements'
+      # could not find the threshold value in jest.config.js
+      # therefore hardcoded for now
+      # - name: Get Threshold
+      #   id: threshold
+      #   uses: notiz-dev/github-action-json-property@release
+      #   with:
+      #     path: 'jest.config.js'
+      #     prop_path: 'coverageThreshold.global.statements'
 
       - name: Install dependencies
         run: yarn
@@ -34,6 +35,7 @@ jobs:
         uses: artiomtr/jest-coverage-report-action@v2.0-rc.4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          threshold: ${{steps.threshold.outputs.prop}}
+          # threshold: ${{steps.threshold.outputs.prop}}
+          threshold: 80
           package-manager: yarn
           custom-title: Jest Coverage Report
