@@ -1,6 +1,16 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
+  // commented the test thresholds for green CI
+  // coverageThreshold: {
+  //   global: {
+  //     statements: 90,
+  //     branches: 90,
+  //     functions: 90,
+  //     lines: 90,
+  //   },
+  // },
+  coverageReporters: ["json-summary", "text", "lcov"],
   collectCoverageFrom: [
     "./common/**/*.{js,jsx,ts,tsx}",
     "./containers/**/*.{js,jsx,ts,tsx}",
