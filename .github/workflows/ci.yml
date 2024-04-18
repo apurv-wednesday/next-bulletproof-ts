@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -32,19 +32,19 @@ jobs:
       - name: Build Project
         run: yarn build
       
-        # commenting for now to make CI green , will try this 
-        # - name: run Lighthouse CI
-        #   run: |
-        #     yarn global add @lhci/cli@0.8.x
-        #     lhci autorun --collect.staticDistDir
-        
+      - name: Lighthouse CI
+        run: |
+          yarn global add @lhci/cli
+          lhci collect
+          lhci upload
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
           
-      - uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      # - uses: sonarsource/sonarqube-scan-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       # commenting for now to make CI green , will try this
       # - uses: sonarsource/sonarqube-quality-gate-action@master
